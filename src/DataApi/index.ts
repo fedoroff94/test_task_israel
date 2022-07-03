@@ -1,7 +1,7 @@
 import {
   Country,
   GetCounriesRequest,
-  GetCounriesResponse
+  GetCounriesResponse,
 } from "./country.interface";
 import { GetPeopleRequest, GetPeopleResponse } from "./people.interface";
 import countriesData from "./country.data.json";
@@ -13,12 +13,8 @@ const searchCountryParameters = [
   "alpha3Code",
   "capital",
   "nativeName",
-  "region"
+  "region",
 ];
-
-const countriesAsObject = countriesData.reduce<{
-  [country: string]: Country;
-}>((acc, row) => ({ ...acc, [row.alpha2Code]: row }), {});
 
 const getCountries: (
   req: GetCounriesRequest
@@ -29,7 +25,7 @@ const getCountries: (
         return resolve({
           searchResults: countriesData,
           searchResultCount: countriesData.length,
-          totalResultCounter: countriesData.length
+          totalResultCounter: countriesData.length,
         });
       const nameAsLowerCase = search.toLowerCase();
 
@@ -41,7 +37,7 @@ const getCountries: (
       return resolve({
         searchResults: filteredData,
         searchResultCount: filteredData.length,
-        totalResultCounter: countriesData.length
+        totalResultCounter: countriesData.length,
       });
     }, (Math.random() * 1 + 1) * 1000);
   });
@@ -56,28 +52,20 @@ const getPeople: (
         return resolve({
           searchResults: peopleData,
           searchResultCount: peopleData.length,
-          totalResultCounter: peopleData.length
+          totalResultCounter: peopleData.length,
         });
       const nameAsLowerCase = search.toLowerCase();
       const filteredData = peopleData.filter((row) => {
-        const country: any = countriesAsObject[row.country];
-        const foundInCountry = searchCountryParameters.some(
-          (parameter: any) => {
-            return (
-              country &&
-              country[parameter].toLowerCase().includes(nameAsLowerCase)
-            );
-          }
-        );
-        const foundInFullName = `${row.first_name.toLowerCase()} ${row.last_name.toLowerCase()}`.includes(
-          nameAsLowerCase
-        );
-        return foundInCountry || foundInFullName;
+        const foundInFullName =
+          `${row.first_name.toLowerCase()} ${row.last_name.toLowerCase()}`.includes(
+            nameAsLowerCase
+          );
+        return foundInFullName;
       });
       return resolve({
         searchResults: filteredData,
         searchResultCount: filteredData.length,
-        totalResultCounter: peopleData.length
+        totalResultCounter: peopleData.length,
       });
     }, (Math.random() * 1 + 1) * 1000);
   });
