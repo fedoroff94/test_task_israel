@@ -3,12 +3,12 @@ export interface GetCounriesRequest {
   }
   
   export interface GetCounriesResponse {
-    searchResults: Country[];
+    searchResults: ICountry[];
     searchResultCount: number;
     totalResultCounter: number;
   }
   
-  export interface Country {
+  export interface ICountry {
     name: string;
     topLevelDomain: string[];
     alpha2Code: string;
@@ -25,18 +25,18 @@ export interface GetCounriesRequest {
     timezones: string[];
     borders: string[];
     nativeName: string;
-    currencies: Currency[];
-    languages: Language[];
+    currencies: ICurrency[];
+    languages: ILanguage[];
     flag: string;
   }
   
-  interface Language {
+  interface ILanguage {
     code: string;
     name: string;
     nativeName: string;
   }
   
-  interface Currency {
+  interface ICurrency {
     code?: string | null;
     name?: string | null;
     symbol?: string | null;

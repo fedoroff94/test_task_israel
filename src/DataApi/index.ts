@@ -1,5 +1,4 @@
 import {
-  Country,
   GetCounriesRequest,
   GetCounriesResponse,
 } from "./country.interface";

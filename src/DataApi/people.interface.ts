@@ -3,12 +3,12 @@ export interface GetPeopleRequest {
   }
   
   export interface GetPeopleResponse {
-    searchResults: People[];
+    searchResults: IPeople[];
     searchResultCount: number;
     totalResultCounter: number;
   }
   
-  export interface People {
+  export interface IPeople {
     id: string;
     first_name: string;
     last_name: string;
